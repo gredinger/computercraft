@@ -56,7 +56,6 @@ function fSscan()
           end
         end
       end
-    sleep(.1)
     end
   end
 end
@@ -175,6 +174,9 @@ function validSeed(i)
     return true
   end
   if n == "magicalcrops:IronSeeds" then
+    return true
+  end
+  if n == "minecraft:wheat_seeds" then
     return true
   end
   return false
