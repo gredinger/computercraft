@@ -182,7 +182,7 @@ function validSeed(i)
   return false
 end
 
-whule true do
+while true do
 fFarm()
 sleep(600)
 end
