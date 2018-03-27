@@ -3,7 +3,7 @@ x = tArgs[1]
 y = tArgs[2]
 
 function fSubforward()
-  if 	turtle.getItemCount(turtle.getSelectedSlot()) == 0 then
+  if turtle.getItemCount(turtle.getSelectedSlot()) == 0 or not validSeed(turtle.getItemDetail(turtle.getSelectedSlot())) then
     fSscan()
   end
   repeat
@@ -29,22 +29,28 @@ function fSubforward()
   until bGo == true
 end
 function fSscan()
-  for i = 1, 15 do
-    tData = turtle.getItemDetail(i)
-    if validPlant(tData.name) then
-      if i == 1 then
-        turtle.select(1)
-        for j = 2, 15 do
-          tSdata = turtle.getItemDetail(j)
-          nCnt = turtle.getItemCount(j)
+  if turtle.getItemCount(1) > 0 then
+    if not validSeed(1) then
+      for i = 2, 15 do
+        if turtle.getItemCount(i) < 1 then
+          turtle.select(1)
+          turtle.transferTo(i)
         end
       end
-      turtle.select(i)
-    else
-      turtle.select(i)
-      turtle.transferTo(1)
-      turtle.select(1)
-      break
+    end
+  for i = 2, 15 do
+    print(i)
+    if turtle.getItemCount(i) > 0 then
+      tData = turtle.getItemDetail(i)
+      if tData then
+        if validSeed(tData) then
+          print("trying to move around slots")
+          turtle.select(i)
+          turtle.transferTo(1)
+          turtle.select(1)
+          break
+        end
+      end
     end
     sleep(.1)
   end
@@ -53,7 +59,9 @@ function fSforward()
   _, tMeta = turtle.inspectDown()
   if tMeta.metadata == 7 then
     turtle.digDown()
-    fSscan()
+    if 	turtle.getItemCount(turtle.getSelectedSlot()) == 0  or not validSeed(turtle.getItemDetail(turtle.getSelectedSlot())) then
+      fSscan()
+    end
     turtle.placeDown()
   elseif tMeta.metadata == nil then
     turtle.placeDown()
@@ -106,6 +114,8 @@ function fMkui()
   print('        .-./*) |------| (*\\.-.')
   print('      _/___\\/     ||     \\/___\\_')
   print('        U U       ||TARTLE  U U')
+  print('------------------')
+  print('Modified by Gene')
 end
 function fFarm()
   fMkui()
@@ -147,7 +157,9 @@ function fFarm()
     end
   end
 end
-function validSeed(n)
+function validSeed(i)
+  n = i.name
+  print(n)
   if n == "minecraft:carrot" then
     return true
   end
@@ -155,6 +167,9 @@ function validSeed(n)
     return true
   end
   if n == "magicalcrops:MinicioSeeds" then
+    return true
+  end
+  if n == "magicalcrops:IronSeeds" then
     return true
   end
   return false
