@@ -30,7 +30,7 @@ function fSubforward()
 end
 function fSscan()
   if turtle.getItemCount(1) > 0 then
-    if not validSeed(1) then
+    if not validSeed(turtle.getItemDetail(1)) then
       for i = 2, 15 do
         if turtle.getItemCount(i) < 1 then
           turtle.select(1)
