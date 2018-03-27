@@ -57,6 +57,7 @@ function fSscan()
         end
       end
     sleep(.1)
+    end
   end
 end
 function fSforward()
