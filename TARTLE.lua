@@ -179,11 +179,14 @@ function validSeed(i)
   if n == "minecraft:wheat_seeds" then
     return true
   end
+  if n == "magicalcrops:SteelSeeds" then
+    return true
+  end
   return false
 end
 
-while 1 do
-fFarm()
-sleep(600)
+while true do
+  fFarm()
+  sleep(600)
 end
 
