@@ -3,7 +3,7 @@ x = tArgs[1]
 y = tArgs[2]
 
 function fSubforward()
-  if turtle.getItemCount(turtle.getSelectedSlot()) == 0 or not validSeed(turtle.getItemDetail(turtle.getSelectedSlot())) then
+  if turtle.getItemCount(turtle.getSelectedSlot()) == 0 or not validSeed(turtle.getItemDetail(1)) then
     fSscan()
   end
   repeat
@@ -63,7 +63,7 @@ function fSforward()
   _, tMeta = turtle.inspectDown()
   if tMeta.metadata == 7 then
     turtle.digDown()
-    if 	turtle.getItemCount(turtle.getSelectedSlot()) == 0  or not validSeed(turtle.getItemDetail(turtle.getSelectedSlot())) then
+    if 	turtle.getItemCount(turtle.getSelectedSlot()) == 0  or not validSeed(turtle.getItemDetail(1)) then
       fSscan()
     end
     turtle.placeDown()
