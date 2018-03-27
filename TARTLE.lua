@@ -29,7 +29,7 @@ function fSubforward()
   until bGo == true
 end
 function fSscan()
-  slotData = turtle.getItemDetail(1)
+  local slotData = turtle.getItemDetail(1)
   if slotData then
     if not validSeed(slotData) then
       for i = 2, 15 do
