@@ -38,6 +38,7 @@ function fSscan()
         end
       end
     end
+  end
   for i = 2, 15 do
     print(i)
     if turtle.getItemCount(i) > 0 then
