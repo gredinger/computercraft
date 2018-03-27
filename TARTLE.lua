@@ -29,30 +29,33 @@ function fSubforward()
   until bGo == true
 end
 function fSscan()
-  if turtle.getItemCount(1) > 0 then
-    if not validSeed(turtle.getItemDetail(1)) then
+  slotData = turtle.getItemDetail(1)
+  if slotData then
+    if not validSeed(slotData) then
       for i = 2, 15 do
         if turtle.getItemCount(i) < 1 then
           turtle.select(1)
           turtle.transferTo(i)
+          slotData = turtle.getItemDetail(1)
         end
       end
     end
   end
-  for i = 2, 15 do
-    print(i)
-    if turtle.getItemCount(i) > 0 then
-      tData = turtle.getItemDetail(i)
-      if tData then
-        if validSeed(tData) then
-          print("trying to move around slots")
-          turtle.select(i)
-          turtle.transferTo(1)
-          turtle.select(1)
-          break
+  if not slotData then
+    for i = 2, 15 do
+      print(i)
+      if turtle.getItemCount(i) > 0 then
+        tData = turtle.getItemDetail(i)
+        if tData then
+          if validSeed(tData) then
+            print("trying to move around slots")
+            turtle.select(i)
+            turtle.transferTo(1)
+            turtle.select(1)
+            break
+          end
         end
       end
-    end
     sleep(.1)
   end
 end
